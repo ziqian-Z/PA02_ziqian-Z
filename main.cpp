@@ -89,7 +89,7 @@ int main(int argc, char** argv){
     movies.push(movielist);
     clock_t t;
     // t = clock();
-    // movies.print(); //O(mn+m)
+    movies.print(); //O(mn+m)
     // t = clock() - t;
     // printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
     //  For each prefix,
