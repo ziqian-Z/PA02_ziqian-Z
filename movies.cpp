@@ -58,7 +58,7 @@ void Movie_Prefix :: print(){
       cout << "No movies found with prefix "<< prefixes[i] << endl;
     }
   }
-  cout << endl;
+  
   for(int i = 0; i < pre_movie.size();i++){
     if(pre_movie[i].empty()!= true){
       cout << "Best movie with prefix " << prefixes[i] << " is " ;
