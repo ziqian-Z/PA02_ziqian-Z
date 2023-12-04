@@ -58,12 +58,12 @@ void Movie_Prefix :: print(){
       cout << "No movies found with prefix "<< prefixes[i] << endl;
     }
   }
-  
+
   for(int i = 0; i < pre_movie.size();i++){
     if(pre_movie[i].empty()!= true){
       cout << "Best movie with prefix " << prefixes[i] << " is " ;
-      cout << pre_movie[i][0].movieName << " with rating "; 
-      cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
+      cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
+      // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
     }
   }
 }
