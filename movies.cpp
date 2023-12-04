@@ -20,16 +20,19 @@ bool operator <(const Movie &m1,const Movie &m2){
   }
 }
 
-Movie_Prefix :: Movie_Prefix(vector<string> p){
+Movie_Prefix :: Movie_Prefix(vector<string> &p,vector<Movie> &m){
   for (auto e:p){
     prefixes.push_back(e);
   }
   pre_movie.resize(p.size());
-}
-void Movie_Prefix :: push(vector<Movie> movielist){
+  for (auto e:m){
+    movie_list.push_back(e);
+  }
+// }
+// void Movie_Prefix :: push(){
   for (int i = 0; i < prefixes.size(); i++){
     vector<Movie> movie_with_pre;
-    for(auto e : movielist){
+    for(auto e : movie_list){
       if (e.movieName.find(prefixes[i]) == 0){
           movie_with_pre.push_back(e);
       }

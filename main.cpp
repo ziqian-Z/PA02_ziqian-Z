@@ -85,8 +85,8 @@ int main(int argc, char** argv){
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
     
-    Movie_Prefix movies(prefixes);
-    movies.push(movielist);
+    Movie_Prefix movies(prefixes,movielist);
+    // movies.push(movielist);
     // clock_t t;
     // t = clock();
     movies.print(); //O(mk+m) <= O(n+m)

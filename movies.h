@@ -29,8 +29,9 @@ class Movie_Prefix{
    private:
       vector<vector<Movie>> pre_movie;
       vector<string> prefixes;
+      vector<Movie> movie_list;
    public:
-      Movie_Prefix(vector<string> p);
-      void push(vector<Movie> movielist);
+      Movie_Prefix(vector<string> &p, vector<Movie> &m);
+      // void push();
       void print();
 };
