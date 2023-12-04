@@ -57,7 +57,7 @@ void Movie_Prefix :: print(){ // O(mk+m)
     }
   }
 
-  for(int i = 0; i < pre_movie[i].size();i++){ // m 
+  for(int i = 0; i < pre_movie.size();i++){ // m 
     if(pre_movie[i].empty()!= true){
     cout << "Best movie with prefix " << prefixes[i] << " is " ;
     cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
