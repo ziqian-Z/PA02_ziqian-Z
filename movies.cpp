@@ -50,7 +50,7 @@ void Movie_Prefix :: print(){
       cout << "No movies found with prefix "<< prefixes[i] << endl;
     }
     for (auto m : pre_movie[i]){
-      cout << m.movieName << " " << m.movierate << endl;
+      cout << m.movieName << ", " << m.movierate << endl;
     }
     cout << endl;
   }
