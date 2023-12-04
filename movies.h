@@ -31,7 +31,6 @@ class Movie_Prefix{
       vector<string> prefixes;
    public:
       Movie_Prefix(vector<string> p);
-      // void setprefix(vector<string> p);
       void push(vector<Movie> movielist);
       void print();
 };

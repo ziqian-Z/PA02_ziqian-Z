@@ -26,11 +26,6 @@ Movie_Prefix :: Movie_Prefix(vector<string> p){
   }
   pre_movie.resize(p.size());
 }
-// void Movie_Prefix :: setprefix(vector<string> p){
-//   for (auto e:p){
-//     prefixes.push_back(e);
-//   }
-// }
 void Movie_Prefix :: push(vector<Movie> movielist){
   for (int i = 0; i < prefixes.size(); i++){
     vector<Movie> movie_with_pre;
@@ -44,37 +39,29 @@ void Movie_Prefix :: push(vector<Movie> movielist){
   }
 }
 
-void Movie_Prefix :: print(){
-  // for (int i = 0; i < pre_movie.size(); i ++){
-  //   if(pre_movie[i].empty() == false){
-  //     for (auto m : pre_movie[i]){
-  //       cout << m.movieName << ", " << m.movierate << endl;
-  //     }
-  //     cout << endl;
-  //   }
-  // }
-  vector <Movie> Best;
-  vector <string> pre_with_movie;
-  for (int i = 0; i < pre_movie.size(); i++){
+void Movie_Prefix :: print(){ // O(mk+m) 
+  //vector <Movie> Best;
+  //vector <string> pre_with_movie;
+  for (int i = 0; i < pre_movie.size(); i++){ // m
     if(pre_movie[i].empty() == true){
       cout << "No movies found with prefix "<< prefixes[i] << endl;
 
     }
     else{
-      for (auto m : pre_movie[i]){
+      for (auto m : pre_movie[i]){ //k
         cout << m.movieName << ", " << m.movierate << endl;
       }
       cout << endl;
-      pre_with_movie.push_back(prefixes[i]);
-      Best.push_back(pre_movie[i][0]);
+      //pre_with_movie.push_back(prefixes[i]);
+      //Best.push_back(pre_movie[i][0]);
     }
   }
 
-  for(int i = 0; i < pre_with_movie.size();i++){
-    // if(pre_movie[i].empty()!= true){
-    cout << "Best movie with prefix " << pre_with_movie[i] << " is " ;
-    cout << Best[i].movieName << " with rating "<< Best[i].movierate << endl; 
+  for(int i = 0; i < pre_movie[i].size();i++){ // m 
+    if(pre_movie[i].empty()!= true){
+    cout << "Best movie with prefix " << prefixes[i] << " is " ;
+    cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
-    //}
+    }
   }
 }
