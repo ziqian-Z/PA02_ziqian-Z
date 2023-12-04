@@ -59,7 +59,7 @@ int main(int argc, char** argv){
         int i = 0;
         while(ordered_movie.empty() == false){
             movielist[i] = ordered_movie.top();
-            cout << movielist[i].movieName << " has rating " << movielist[i].movierate << endl;
+            cout << movielist[i].movieName << ", " << movielist[i].movierate << endl;
             ordered_movie.pop();
             i++;
         }
@@ -88,10 +88,10 @@ int main(int argc, char** argv){
     Movie_Prefix movies(prefixes);
     movies.push(movielist);
     clock_t t;
-    t = clock();
-    movies.print(); //O(mn+m)
-    t = clock() - t;
-    printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
+    // t = clock();
+    // movies.print(); //O(mn+m)
+    // t = clock() - t;
+    // printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
     // cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
