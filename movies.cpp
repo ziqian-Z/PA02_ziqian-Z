@@ -45,15 +45,20 @@ void Movie_Prefix :: push(vector<Movie> movielist){
 }
 
 void Movie_Prefix :: print(){
+  for (int i = 0; i < pre_movie.size(); i ++){
+    if(pre_movie[i].empty() == false){
+      for (auto m : pre_movie[i]){
+        cout << m.movieName << ", " << m.movierate << endl;
+      }
+      cout << endl;
+    }
+  }
   for (int i = 0; i < pre_movie.size(); i++){
     if(pre_movie[i].empty() == true){
       cout << "No movies found with prefix "<< prefixes[i] << endl;
     }
-    for (auto m : pre_movie[i]){
-      cout << m.movieName << ", " << m.movierate << endl;
-    }
-    cout << endl;
   }
+  cout << endl;
   for(int i = 0; i < pre_movie.size();i++){
     if(pre_movie[i].empty()!= true){
       cout << "Best movie with prefix " << prefixes[i] << " is " ;
