@@ -87,26 +87,28 @@ int main(int argc, char** argv){
     
     Movie_Prefix movies(prefixes,movielist);
     vector<vector<Movie>> pre_movie = movies.getmovie_list();
-    for (int i = 0; i < pre_movie.size(); i++){ // m
+    for (int i = 0; i < pre_movie.size(); i++){ // O(m)
         if(pre_movie[i].empty() == true){
             cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
         else{
-            for (auto m : pre_movie[i]){ //k
-            cout << m.movieName << ", " << m.movierate << endl;
+            for (auto m : pre_movie[i]){ //O(k)
+                cout << m.movieName << ", " << m.movierate << endl;
             }
             cout << endl;
-        //pre_with_movie.push_back(prefixes[i]);
-        //Best.push_back(pre_movie[i][0]);
         }
-    }
-    for(int i = 0; i < pre_movie.size();i++){ // m 
+    } 
+    // O(mk)<=O(n)
+
+    for(int i = 0; i < pre_movie.size();i++){ // O(m) 
         if(pre_movie[i].empty()!= true){
         cout << "Best movie with prefix " << prefixes[i] << " is " ;
         cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
         }
     }
+    // Total runtime = O(n+m)
+
     // movies.push(movielist);
     // clock_t t;
     // t = clock();
@@ -121,14 +123,6 @@ int main(int argc, char** argv){
 
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
 
-
-// In my data structure, movies are stored based on the prefix and desired order
-// For printing the process, there is a nested loop, looping over all elements to check if any movies started with i_th prefix 
-// if there are movies, print them. So the total run time should be O(mn)
-// Then loop over again to check if the prefix has no movie start with. The time complexity for this is O(m*1) = O(m)
-// Then loop over again, if the prefix contained in movies, print the first one to get the best rated movie. 
-// The time complexity for the third loop is O(m*1) = O(m)
-// So the total tun time for the three loop is O(mn+n+n) = O(mn+2m) = O(mn+m)
 
 
 bool parseLine(string &line, string &movieName, double &movieRating) {
