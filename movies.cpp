@@ -41,30 +41,32 @@ Movie_Prefix :: Movie_Prefix(vector<string> &p,vector<Movie> &m){
     pre_movie[i] = movie_with_pre;
   }
 }
-
-void Movie_Prefix :: print(){ // O(mk+m) 
-  //vector <Movie> Best;
-  //vector <string> pre_with_movie;
-  for (int i = 0; i < pre_movie.size(); i++){ // m
-    if(pre_movie[i].empty() == true){
-      cout << "No movies found with prefix "<< prefixes[i] << endl;
-
-    }
-    else{
-      for (auto m : pre_movie[i]){ //k
-        cout << m.movieName << ", " << m.movierate << endl;
-      }
-      cout << endl;
-      //pre_with_movie.push_back(prefixes[i]);
-      //Best.push_back(pre_movie[i][0]);
-    }
-  }
-
-  for(int i = 0; i < pre_movie.size();i++){ // m 
-    if(pre_movie[i].empty()!= true){
-    cout << "Best movie with prefix " << prefixes[i] << " is " ;
-    cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
-      // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
-    }
-  }
+vector<vector<Movie>> Movie_Prefix :: getmovie_list() const{
+  return pre_movie;
 }
+// void Movie_Prefix :: print(){ // O(mk+m) 
+//   //vector <Movie> Best;
+//   //vector <string> pre_with_movie;
+//   for (int i = 0; i < pre_movie.size(); i++){ // m
+//     if(pre_movie[i].empty() == true){
+//       cout << "No movies found with prefix "<< prefixes[i] << endl;
+
+//     }
+//     else{
+//       for (auto m : pre_movie[i]){ //k
+//         cout << m.movieName << ", " << m.movierate << endl;
+//       }
+//       cout << endl;
+//       //pre_with_movie.push_back(prefixes[i]);
+//       //Best.push_back(pre_movie[i][0]);
+//     }
+//   }
+
+//   for(int i = 0; i < pre_movie.size();i++){ // m 
+//     if(pre_movie[i].empty()!= true){
+//     cout << "Best movie with prefix " << prefixes[i] << " is " ;
+//     cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
+//       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
+//     }
+//   }
+// }

@@ -33,5 +33,6 @@ class Movie_Prefix{
    public:
       Movie_Prefix(vector<string> &p, vector<Movie> &m);
       // void push();
-      void print();
+      vector<vector<Movie>> getmovie_list() const;
+      // void print();
 };

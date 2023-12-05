@@ -65,7 +65,7 @@ int main(int argc, char** argv){
         }
         return 0;
     }
-
+    // Part 2
     ifstream prefixFile (argv[2]);
 
     if (prefixFile.fail()) {
@@ -86,10 +86,31 @@ int main(int argc, char** argv){
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
     
     Movie_Prefix movies(prefixes,movielist);
+    vector<vector<Movie>> pre_movie = movies.getmovie_list();
+    for (int i = 0; i < pre_movie.size(); i++){ // m
+        if(pre_movie[i].empty() == true){
+        cout << "No movies found with prefix "<< prefixes[i] << endl;
+        }
+        else{
+            for (auto m : pre_movie[i]){ //k
+            cout << m.movieName << ", " << m.movierate << endl;
+            }
+            cout << endl;
+        //pre_with_movie.push_back(prefixes[i]);
+        //Best.push_back(pre_movie[i][0]);
+        }
+    }
+    for(int i = 0; i < pre_movie.size();i++){ // m 
+        if(pre_movie[i].empty()!= true){
+        cout << "Best movie with prefix " << prefixes[i] << " is " ;
+        cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
+      // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
+        }
+    }
     // movies.push(movielist);
     // clock_t t;
     // t = clock();
-    movies.print(); //O(mk+m) <= O(n+m)
+    // movies.print(); //O(mk+m) <= O(n+m)
     // t = clock() - t;
     // printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
     //  For each prefix,
