@@ -22,6 +22,27 @@ bool operator <(const Movie &m1,const Movie &m2){
 }
 
 Movie_Prefix::Movie_Prefix(vector<string> &p, vector<Movie> &m){
+  // for (auto e:p){
+  //   prefixes.push(e); // alphabetical order of prefix
+  // }
+  // int j = 0;
+  // while(prefixes.empty()!=true || j < m.size()){
+  //   vector<Movie> movie_with_pre;
+  //   pre_movie.insert(make_pair(prefixes.top(),movie_with_pre));
+  //   if (m[j].movieName.find(prefixes.top())==0){
+  //     movie_with_pre.push_back(m[j]);
+  //     j++;
+  //   }
+  //   else if(m[j].movieName < prefixes.top()){
+  //     j++;
+  //   }
+  //   else{
+  //     pre_movie[prefixes.top()] = movie_with_pre;
+  //     prefixes.pop();
+  //     // j++;
+  //   }
+  // }
+  sort(m.begin(), m.end(), Comp_ra());
   for (int i = 0; i < p.size(); i++){
       vector<Movie> movie_with_pre;
       for(auto e : m){
@@ -29,7 +50,7 @@ Movie_Prefix::Movie_Prefix(vector<string> &p, vector<Movie> &m){
             movie_with_pre.push_back(e);
         }
       }
-      sort(movie_with_pre.begin(), movie_with_pre.end(), Comp_ra());
+      // sort(movie_with_pre.begin(), movie_with_pre.end(), Comp_ra());
       pre_movie.insert(make_pair(p[i],movie_with_pre));
     }
 }
