@@ -102,8 +102,8 @@ int main(int argc, char** argv){
 
     for(int i = 0; i < pre_movie.size();i++){ // O(m) 
         if(pre_movie[i].empty()!= true){
-        cout << "Best movie with prefix " << prefixes[i] << " is " ;
-        cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
+            cout << "Best movie with prefix " << prefixes[i] << " is " ;
+            cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
         }
     }
