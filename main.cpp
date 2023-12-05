@@ -89,7 +89,7 @@ int main(int argc, char** argv){
     vector<vector<Movie>> pre_movie = movies.getmovie_list();
     for (int i = 0; i < pre_movie.size(); i++){ // m
         if(pre_movie[i].empty() == true){
-        cout << "No movies found with prefix "<< prefixes[i] << endl;
+            cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
         else{
             for (auto m : pre_movie[i]){ //k
