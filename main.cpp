@@ -86,6 +86,7 @@ int main(int argc, char** argv){
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
     
     Movie_Prefix movies(prefixes,movielist);
+
     vector<vector<Movie>> pre_movie = movies.getmovie_list();
     for (int i = 0; i < pre_movie.size(); i++){ // O(m)
         if(pre_movie[i].empty() == true){
@@ -97,7 +98,7 @@ int main(int argc, char** argv){
             }
             cout << endl;
         }
-    } 
+    }
     // O(mk)<=O(n)
 
     for(int i = 0; i < pre_movie.size();i++){ // O(m) 

@@ -7,7 +7,7 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
-#include <cstring>
+#include <string>
 #include <iomanip>
 using namespace std;
 
@@ -24,23 +24,30 @@ Movie_Prefix :: Movie_Prefix(vector<string> &p,vector<Movie> &m){
   for (auto e:p){
     prefixes.push_back(e);
   }
+  sort(prefixes.begin(),prefixes.end()); // sort prefix in alphabetical order
+
   pre_movie.resize(p.size());
   for (auto e:m){
     movie_list.push_back(e);
   }
+  sort(movie_list.begin(),movie_list.end(),Comp_al()); // sort movie in alphabetical order
 // }
 // void Movie_Prefix :: push(){
   for (int i = 0; i < prefixes.size(); i++){
     vector<Movie> movie_with_pre;
-    for(auto e : movie_list){
-      if (e.movieName.find(prefixes[i]) == 0){
-          movie_with_pre.push_back(e);
+    for(int j = 0; j < movie_list.size();){
+      if (movie_list[j].movieName.find(prefixes[i]) == 0){
+          movie_with_pre.push_back(movie_list[j]);
+      }
+      if (movie_list[j].movieName < prefixes[i]){
+        j++;
       }
     }
-    sort(movie_with_pre.begin(), movie_with_pre.end(), Comp_ra());
+    // sort(movie_with_pre.begin(), movie_with_pre.end(), Comp_ra());
     pre_movie[i] = movie_with_pre;
   }
 }
+
 vector<vector<Movie>> Movie_Prefix :: getmovie_list() const{
   return pre_movie;
 }
