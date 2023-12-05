@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <set>
 #include <queue>
+#include <map>
 #include "movies.h"
 using namespace std;
 
@@ -87,35 +88,38 @@ int main(int argc, char** argv){
     
     Movie_Prefix movies(prefixes,movielist);
 
-    vector<vector<Movie>> pre_movie = movies.getmovie_list();
-    for (int i = 0; i < pre_movie.size(); i++){ // O(m)
-        if(pre_movie[i].empty() == true){
+    map<string, vector<Movie>> pre_movie = movies.getmovie_list();
+    // map<priority_queue<string, vector<string>,greater<string>>, vector<Movie>>::iterator it;
+    for (int i = 0; i < prefixes.size();i++){ // O(m)
+        string search_prefix = prefixes[i];
+        if(pre_movie.count(search_prefix)<=0){
             cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
         else{
-            for (auto m : pre_movie[i]){ //O(k)
-                cout << m.movieName << ", " << m.movierate << endl;
+            vector<Movie> p = pre_movie.find(prefixes[i])->second;
+            if (p.empty() == true){
+                cout << "No movies found with prefix "<< prefixes[i] << endl;
             }
-            cout << endl;
+            else{
+                for (auto m : p){ //O(k)
+                    cout << m.movieName << ", " << m.movierate << endl;
+                }
+                cout << endl;
+            }
         }
     }
     // O(mk)<=O(n)
 
-    for(int i = 0; i < pre_movie.size();i++){ // O(m) 
-        if(pre_movie[i].empty()!= true){
+    for(int i = 0; i < prefixes.size();i++){ // O(m) 
+        vector<Movie> p = pre_movie.find(prefixes[i])->second;
+        if(p.empty()!= true){
             cout << "Best movie with prefix " << prefixes[i] << " is " ;
-            cout << pre_movie[i][0].movieName << " with rating "<< pre_movie[i][0].movierate << endl; 
+            cout << p[0].movieName << " with rating "<< p[0].movierate << endl; 
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
         }
     }
     // Total runtime = O(n+m)
 
-    // movies.push(movielist);
-    // clock_t t;
-    // t = clock();
-    // movies.print(); //O(mk+m) <= O(n+m)
-    // t = clock() - t;
-    // printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
     // cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;

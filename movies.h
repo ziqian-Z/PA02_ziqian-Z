@@ -4,6 +4,7 @@
 #include <cstring>
 #include <algorithm>
 #include <queue>
+#include <map>
 using namespace std;
 
 // Define the calss for movie name and its rating
@@ -27,12 +28,14 @@ struct Comp_ra{
 
 class Movie_Prefix{
    private:
-      vector<vector<Movie>> pre_movie;
-      vector<string> prefixes;
-      vector<Movie> movie_list;
+      // vector<vector<Movie>> pre_movie;
+      priority_queue<string, vector<string>,greater<string>> prefixes;
+      // vector<string> prefixes;
+      // vector<Movie> movie_list;
+      map <string, vector<Movie>> pre_movie;
    public:
-      Movie_Prefix(vector<string> &p, vector<Movie> &m);
+      Movie_Prefix(vector<string> &p, vector<Movie> &movie_list);
       // void push();
-      vector<vector<Movie>> getmovie_list() const;
+      map <string, vector<Movie>> getmovie_list() const;
       // void print();
 };
