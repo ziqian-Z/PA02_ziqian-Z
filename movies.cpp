@@ -21,10 +21,9 @@ bool operator <(const Movie &m1,const Movie &m2){
   }
 }
 
-Movie_Prefix::Movie_Prefix(vector<string> &p){
-  // priority_queue <string, vector<string>> pre;
+Movie_Prefix::Movie_Prefix(vector<string> &p){ 
   for (auto e:p){
-    prefixes.push(e);
+    prefixes.push(e); // O(log(m))
   }
 }
 
@@ -34,30 +33,27 @@ void Movie_Prefix :: push(vector<Movie> &m){
   int pre = 0;
   int post = 0;
   string prev_prefix = " ";
-  while(!prefixes.empty()){
-    if (prefixes.top().find(prev_prefix) == 0){
-      j = pre;
+  while(!prefixes.empty()){ //m
+    if (prefixes.top().find(prev_prefix) == 0){ //O(1)
+      j = pre; 
     }
     else{
       j = post;
     }
-    while(!prefixes.empty() && j < m.size()){
+    while(!prefixes.empty() && j < m.size()){ //O(n)
       if (m[j].movieName.find(prefixes.top())==0){
         movie_with_pre.push_back(m[j]);
-        // cout << prefixes.top() << " " << m[j].movieName << endl;
         j++;
       }
       else if(m[j].movieName < prefixes.top()){
         j++;
       }
       else{ 
-      //   pre_movie[prefixes.top()] = movie_with_pre;
-      //   movie_with_pre.clear();
         break;
       }
     }
     if(movie_with_pre.size()>1){
-      sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+      sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());//O(klog(k))
     }
     pre_movie[prefixes.top()] = movie_with_pre;
     movie_with_pre.clear();
@@ -73,11 +69,11 @@ void Movie_Prefix :: push(vector<Movie> &m){
     prefixes.pop();
   }
 
-  while(!prefixes.empty()){
-    pre_movie[prefixes.top()] = movie_with_pre;
-    // movie_with_pre.clear();
-    prefixes.pop();
-  }
+  // while(!prefixes.empty()){
+  //   pre_movie[prefixes.top()] = movie_with_pre;
+  //   // movie_with_pre.clear();
+  //   prefixes.pop();
+  // }
 }
 
 map <string, vector<Movie>> Movie_Prefix :: getmovie_list() const{
