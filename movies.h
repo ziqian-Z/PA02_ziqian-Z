@@ -30,10 +30,25 @@ struct Comp_ra{
       return m1 < m2; // descending order of rate
    }
 };
+struct Comp_prefix{
+   bool operator()(const string &str1, const string &str2){
+      int idx = (str1.length() <= str2.length())? str1.length() : str2.length();
+      int i = 0;
+      while(i < idx && str1[i] == str2[i]){
+            i++;
+      }
+      if (i != 0 &&i == idx-1){
+         return str1.length()< str2.length();
+      }
+      else{
+         return str1 < str2;
+      }
+   }
+};
 
 class Movie_Prefix{
    private:
-      priority_queue<string, vector<string>,greater<string>> prefixes;
+      priority_queue <string, vector<string>,greater<string>> prefixes;
       map <string, vector<Movie>> pre_movie;
    public:
       Movie_Prefix(vector<string> &p);

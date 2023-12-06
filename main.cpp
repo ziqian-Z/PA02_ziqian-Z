@@ -88,10 +88,12 @@ int main(int argc, char** argv){
     //  Find all movies that have that prefix and store them in an appropriate data structure
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
+
     sort(movielist.begin(),movielist.end(),Comp_al_1());
-    // for(auto e : movielist){
+    // for (auto e : movielist){
     //     cout << e.movieName << endl;
     // }
+
     Movie_Prefix movies(prefixes);
     movies.push(movielist);
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();
