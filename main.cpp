@@ -90,6 +90,7 @@ int main(int argc, char** argv){
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
 
     sort(movielist.begin(),movielist.end(),Comp_al_1());
+
     // for (auto e : movielist){
     //     cout << e.movieName << endl;
     // }

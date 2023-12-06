@@ -48,8 +48,8 @@ struct Comp_prefix{
 
 class Movie_Prefix{
    private:
-      // priority_queue <string, vector<string>,greater<string>> prefixes;
-      vector<string> prefixes;
+      priority_queue <string, vector<string>,greater<string>> prefixes;
+      // vector<string> prefixes;
       map <string, vector<Movie>> pre_movie;
    public:
       Movie_Prefix(vector<string> &p);
