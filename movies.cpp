@@ -22,66 +22,58 @@ bool operator <(const Movie &m1,const Movie &m2){
 }
 
 Movie_Prefix::Movie_Prefix(vector<string> &p){
+  priority_queue <string, vector<string>> pre;
   for (auto e:p){
-    prefixes.push(e);
+    pre.push(e);
   }
+  while(!pre.empty()){
+    prefixes.push_back(pre.top());
+    int idx = prefixes.size()-1;
+    int pre_idx = idx-1;
+    if(pre_idx >= 0 && prefixes[pre_idx].find(prefixes[idx]) == 0){
+      swap(prefixes[pre_idx],prefixes[idx]);
+    }
+    pre.pop();
+  }
+  // while(!prefixes.empty()){
+  //   cout << prefixes.back()<<endl;
+  //   prefixes.pop_back();
+  // }
 }
 
 void Movie_Prefix :: push(vector<Movie> &m){
-  int pre = 0;
-  int post = 0;
-  // // vector<Movie> movie_with_pre;
   vector<Movie> movie_with_pre;
-  string prev_prefix = " ";
-  while(pre < m.size() && post < m.size()){
-    if (prefixes.top().find(prev_prefix) == 0 && m[pre].movieName.find(prefixes.top()) == 0){
-       movie_with_pre.push_back(m[pre]);
-      pre++;
-    }
-    else if (m[post].movieName.find(prefixes.top())==0){
-      movie_with_pre.push_back(m[post]);
+  int j = 0;
+  while(!prefixes.empty() && j < m.size()){
+    if (m[j].movieName.find(prefixes.back())==0){
+      movie_with_pre.push_back(m[j]);
       // cout << prefixes.top() << " " << m[j].movieName << endl;
-      post++;
+      j++;
     }
-    else if(m[post].movieName < prefixes.top()){
-      post++;
+    else if(m[j].movieName < prefixes.back()){
+      j++;
     }
-    else{
-      if(movie_with_pre.size()>1){
-        sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
-      }
-      pre_movie[prefixes.top()] = movie_with_pre;
-      prev_prefix = prefixes.top();
-      prefixes.pop();
+    else{ 
+      pre_movie[prefixes.back()] = movie_with_pre;
+      prefixes.pop_back();
       movie_with_pre.clear();
     }
   }
-  // while(!prefixes.empty() && j < m.size()){
-  //   if (m[j].movieName.find(prefixes.top())==0){
-  //     movie_with_pre.push_back(m[j]);
-  //     // cout << prefixes.top() << " " << m[j].movieName << endl;
-  //     j++;
-  //   }
-  //   else if(m[j].movieName < prefixes.top()){
-  //     j++;
-  //   }
-  //   else{
-  //     if(movie_with_pre.size()>1){
-  //       sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
-  //     }
-  //     pre_movie[prefixes.top()] = movie_with_pre;
-  //     prefixes.pop();
-  //     movie_with_pre.clear();
-  //   }
-  // }
+  while(!prefixes.empty()){
+    pre_movie[prefixes.back()] = movie_with_pre;
+    movie_with_pre.clear();
+    prefixes.pop_back();
+  }
+  
   while(!prefixes.empty()){
     if(movie_with_pre.size()>1){
-        sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
-      }
-    pre_movie[prefixes.top()] = movie_with_pre;
+      sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+    }
+    pre_movie[prefixes.back()] = movie_with_pre;
     movie_with_pre.clear();
-    prefixes.pop();
+    prefixes.pop_back();
   }
+
 
 
   // while (!prefixes.empty()){
