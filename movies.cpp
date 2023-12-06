@@ -41,12 +41,18 @@ void Movie_Prefix :: push(vector<Movie> &m){
       j++;
     }
     else{ 
+      if(movie_with_pre.size()>0){
+        sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+      }
       pre_movie[prefixes.top()] = movie_with_pre;
       prefixes.pop();
       movie_with_pre.clear();
     }
   }
   while(!prefixes.empty()){
+    if(movie_with_pre.size()>0){
+        sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+      }
     pre_movie[prefixes.top()] = movie_with_pre;
     movie_with_pre.clear();
     prefixes.pop();
