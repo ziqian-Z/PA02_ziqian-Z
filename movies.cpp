@@ -21,39 +21,66 @@ bool operator <(const Movie &m1,const Movie &m2){
   }
 }
 
-Movie_Prefix::Movie_Prefix(vector<string> &p, vector<Movie> &m){
-  // for (auto e:p){
-  //   prefixes.push(e); // alphabetical order of prefix
-  // }
+Movie_Prefix::Movie_Prefix(vector<string> &p){
+  for (auto e:p){
+    prefixes.push(e); // alphabetical order of prefix
+  }
+}
+
+void Movie_Prefix :: push(vector<Movie> &m){
   // int j = 0;
-  // while(prefixes.empty()!=true || j < m.size()){
-  //   vector<Movie> movie_with_pre;
-  //   pre_movie.insert(make_pair(prefixes.top(),movie_with_pre));
+  // // vector<Movie> movie_with_pre;
+  // // sort(m.begin(),m.end(),Comp_al());
+  // while(!prefixes.empty() && j < m.size()){
+  //   // pre_movie.insert(make_pair(prefixes.top(),movie_with_pre));
   //   if (m[j].movieName.find(prefixes.top())==0){
-  //     movie_with_pre.push_back(m[j]);
+  //     // pre_movie[prefixes.top()].push_back(m[j]);
+  //     cout << prefixes.top() << " " << m[j].movieName << endl;
   //     j++;
   //   }
   //   else if(m[j].movieName < prefixes.top()){
   //     j++;
   //   }
-  //   else{
-  //     pre_movie[prefixes.top()] = movie_with_pre;
+  //   else{ 
+  //   // if (m[j].movieName > prefixes.top()){
+  //   // //   if(movie_with_pre.size()>0){
+  //   // //     sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+  //   // //     pre_movie[prefixes.top()] = movie_with_pre;
+  //   // //     movie_with_pre.clear();
+  //   // //     //prefixes.pop();
+  //   // //   }
+  //   // //  else{
+  //   //     pre_movie[prefixes.top()] = movie_with_pre;
   //     prefixes.pop();
-  //     // j++;
   //   }
+  //     // prefixes.pop();
   // }
-  sort(m.begin(), m.end(), Comp_ra());
-  for (int i = 0; i < p.size(); i++){
+
+  // if (!movie_with_pre.empty()){
+  //   sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+  //   pre_movie[prefixes.top()] = movie_with_pre;
+  //   prefixes.pop();
+  //   movie_with_pre.clear();
+  // }
+  // while(!prefixes.empty()){
+  //   pre_movie[prefixes.top()] = movie_with_pre;
+  //   prefixes.pop();
+  // }
+//   sort(m.begin(), m.end(), Comp_ra());
+  while (!prefixes.empty()){
       vector<Movie> movie_with_pre;
       for(auto e : m){
-        if (e.movieName.find(p[i]) == 0){
+        if (e.movieName.find(prefixes.top()) == 0){
             movie_with_pre.push_back(e);
         }
       }
       // sort(movie_with_pre.begin(), movie_with_pre.end(), Comp_ra());
-      pre_movie.insert(make_pair(p[i],movie_with_pre));
+      pre_movie.insert(make_pair(prefixes.top(),movie_with_pre));
+      prefixes.pop();
     }
+
 }
+
 
 map <string, vector<Movie>> Movie_Prefix :: getmovie_list() const{
   return pre_movie;

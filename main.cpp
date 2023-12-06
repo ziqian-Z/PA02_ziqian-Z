@@ -64,6 +64,9 @@ int main(int argc, char** argv){
             ordered_movie.pop();
             i++;
         }
+        // for (auto e:movielist){
+        //     cout << e.movieName << endl;
+        // }
         return 0;
     }
     // Part 2
@@ -86,29 +89,23 @@ int main(int argc, char** argv){
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
     
-    Movie_Prefix movies(prefixes,movielist);
-
+    Movie_Prefix movies(prefixes);
+    movies.push(movielist);
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();
     // map<priority_queue<string, vector<string>,greater<string>>, vector<Movie>>::iterator it;
     for (int i = 0; i < prefixes.size();i++){ // O(m)
         string search_prefix = prefixes[i];
-        if(pre_movie.count(search_prefix)<=0){
+        vector<Movie> p = pre_movie.find(prefixes[i])->second;
+        if (p.empty() == true){
             cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
         else{
-            vector<Movie> p = pre_movie.find(prefixes[i])->second;
-            if (p.empty() == true){
-                cout << "No movies found with prefix "<< prefixes[i] << endl;
+            for (auto m : p){ //O(k)
+                cout << m.movieName << ", " << m.movierate << endl;
             }
-            else{
-                for (auto m : p){ //O(k)
-                    cout << m.movieName << ", " << m.movierate << endl;
-                }
-                cout << endl;
-            }
+            cout << endl;
         }
     }
-    // O(mk)<=O(n)
 
     for(int i = 0; i < prefixes.size();i++){ // O(m) 
         vector<Movie> p = pre_movie.find(prefixes[i])->second;

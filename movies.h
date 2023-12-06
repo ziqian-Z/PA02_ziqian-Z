@@ -28,14 +28,10 @@ struct Comp_ra{
 
 class Movie_Prefix{
    private:
-      // vector<vector<Movie>> pre_movie;
       priority_queue<string, vector<string>,greater<string>> prefixes;
-      // vector<string> prefixes;
-      // vector<Movie> movie_list;
       map <string, vector<Movie>> pre_movie;
    public:
-      Movie_Prefix(vector<string> &p, vector<Movie> &movie_list);
-      // void push();
+      Movie_Prefix(vector<string> &p);
       map <string, vector<Movie>> getmovie_list() const;
-      // void print();
+      void push(vector<Movie> &movie_list);
 };
