@@ -93,22 +93,22 @@ int main(int argc, char** argv){
     Movie_Prefix movies(prefixes);
     movies.push(movielist);
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();
-    for (int i = 0; i < prefixes.size();i++){ // O(m)
+    for (int i = 0; i < prefixes.size();i++){ // m
         string search_prefix = prefixes[i];
-        vector<Movie> p = pre_movie.find(prefixes[i])->second;
+        vector<Movie> p = pre_movie.find(prefixes[i])->second; //log(m)
         if (p.empty() == true){
             cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
         else{
-            for (auto m : p){ //O(k)
+            for (auto m : p){ //k
                 cout << m.movieName << ", " << m.movierate << endl;
             }
             cout << endl;
         }
     }
 
-    for(int i = 0; i < prefixes.size();i++){ // O(m) 
-        vector<Movie> p = pre_movie.find(prefixes[i])->second;
+    for(int i = 0; i < prefixes.size();i++){ // m
+        vector<Movie> p = pre_movie.find(prefixes[i])->second; // log(m)
         if(p.empty()!= true){
             cout << "Best movie with prefix " << prefixes[i] << " is " ;
             cout << p[0].movieName << " with rating "<< p[0].movierate << endl; 
