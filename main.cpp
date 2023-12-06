@@ -59,8 +59,8 @@ int main(int argc, char** argv){
         }
         int i = 0;
         while(ordered_movie.empty() == false){
-            movielist[i] = ordered_movie.top();
-            cout << movielist[i].movieName << ", " << movielist[i].movierate << endl;
+            // movielist[i] = ordered_movie.top();
+            cout << ordered_movie.top().movieName << ", " << ordered_movie.top().movierate << endl;
             ordered_movie.pop();
             i++;
         }
@@ -88,7 +88,10 @@ int main(int argc, char** argv){
     //  Find all movies that have that prefix and store them in an appropriate data structure
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
-    
+    sort(movielist.begin(),movielist.end(),Comp_al_1());
+    // for(auto e : movielist){
+    //     cout << e.movieName << endl;
+    // }
     Movie_Prefix movies(prefixes);
     movies.push(movielist);
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();

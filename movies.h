@@ -20,6 +20,11 @@ struct Comp_al{
       return m1.movieName > m2.movieName; // ascending alphabetical order 
    }
 };
+struct Comp_al_1{
+   bool operator()(const Movie &m1,const Movie &m2){
+      return m1.movieName < m2.movieName; // ascending alphabetical order 
+   }
+};
 struct Comp_ra{
    bool operator()(const Movie &m1,const Movie &m2){
       return m1 < m2; // descending order of rate
@@ -33,5 +38,5 @@ class Movie_Prefix{
    public:
       Movie_Prefix(vector<string> &p);
       map <string, vector<Movie>> getmovie_list() const;
-      void push(vector<Movie> &movie_list);
+      void push(vector<Movie> &m);
 };
