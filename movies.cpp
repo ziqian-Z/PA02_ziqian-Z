@@ -60,6 +60,9 @@ void Movie_Prefix :: push(vector<Movie> &m){
     }
   }
   while(!prefixes.empty()){
+    if(movie_with_pre.size()>1){
+      sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());
+    }
     pre_movie[prefixes.back()] = movie_with_pre;
     movie_with_pre.clear();
     prefixes.pop_back();
