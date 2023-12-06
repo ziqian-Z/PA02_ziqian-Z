@@ -90,15 +90,9 @@ int main(int argc, char** argv){
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
 
     sort(movielist.begin(),movielist.end(),Comp_al_1());
-
-    // for (auto e : movielist){
-    //     cout << e.movieName << endl;
-    // }
-
     Movie_Prefix movies(prefixes);
     movies.push(movielist);
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();
-    // map<priority_queue<string, vector<string>,greater<string>>, vector<Movie>>::iterator it;
     for (int i = 0; i < prefixes.size();i++){ // O(m)
         string search_prefix = prefixes[i];
         vector<Movie> p = pre_movie.find(prefixes[i])->second;
@@ -121,7 +115,6 @@ int main(int argc, char** argv){
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
         }
     }
-    // Total runtime = O(n+m)
 
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
