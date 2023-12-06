@@ -34,7 +34,7 @@ void Movie_Prefix :: push(vector<Movie> &m){
   vector<Movie> movie_with_pre;
   string prev_prefix = " ";
   while(pre < m.size() && post < m.size()){
-    if (pre_movie.size()>0 && prefixes.top().find(prev_prefix) == 0 && m[pre].movieName.find(prefixes.top()) == 0){
+    if (prefixes.top().find(prev_prefix) == 0 && m[pre].movieName.find(prefixes.top()) == 0){
        movie_with_pre.push_back(m[pre]);
       pre++;
     }
