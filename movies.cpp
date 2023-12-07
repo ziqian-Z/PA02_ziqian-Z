@@ -68,12 +68,6 @@ void Movie_Prefix :: push(vector<Movie> &m){
     prev_prefix = prefixes.top();
     prefixes.pop();
   }
-
-  // while(!prefixes.empty()){
-  //   pre_movie[prefixes.top()] = movie_with_pre;
-  //   // movie_with_pre.clear();
-  //   prefixes.pop();
-  // }
 }
 
 map <string, vector<Movie>> Movie_Prefix :: getmovie_list() const{

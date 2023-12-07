@@ -89,11 +89,11 @@ int main(int argc, char** argv){
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
 
-    sort(movielist.begin(),movielist.end(),Comp_al_1());
-    Movie_Prefix movies(prefixes);
-    movies.push(movielist);
+    sort(movielist.begin(),movielist.end(),Comp_al_1()); // constant space for movielist
+    Movie_Prefix movies(prefixes); // O(m) for having a new min-heap
+    movies.push(movielist); 
     map<string, vector<Movie>> pre_movie = movies.getmovie_list();
-    for (int i = 0; i < prefixes.size();i++){ // m
+    for (int i = 0; i < prefixes.size();i++){ // Iterate m times
         string search_prefix = prefixes[i];
         vector<Movie> p = pre_movie.find(prefixes[i])->second; //log(m)
         if (p.empty() == true){
@@ -123,6 +123,46 @@ int main(int argc, char** argv){
 }
 
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
+
+/***************************** Run Time Analysis *************************************/ 
+/*Reorder prefixes and movielist in alphabetical order*/ 
+// use a min-heap for prefixes --> O(log(m))
+// use vector or movielist--> O(nlog(n))
+// Overall we have T = (log(m)+nlog(n)) for soriting
+
+/* Run time for store values into my data structure*/
+
+// We have m prefixes in alphabetical order, n movies in alphabetical order,
+// and k movies for each prefixes (for the worst case)
+// We iterate through the m prefix -- O(m)
+// While iterating through the prefix, we check if the movie start with the specific prefix
+// if the previous prefix is a prefix of the next prefix, 
+// we iterate movielist from where the previous prefix started for next prefix
+// For the worst case, every next prefix is a prefix of previous prefix,
+// then we iterate the whole movie list for every prefix --> O(mn)
+// If we find movie start with the prefix, we store it in to a vector
+// After we find all movies start with that prefix, we sort the movies in desired order
+// For the worst case, we have a k movies for every prefix --> O(m*(klog(k)))
+// Therefore, overall, we have T = m*n+m*klog(k)
+
+/*Run Time for Printing*/
+// We have a map with key of prefix, and value of sorted movie vector with that prefix
+// Iterating through prefix list to check all prefixes -- m
+// For each prefix, find the value of that prefix key -- O(mlog(m))
+// If the vector is empty, print information; if not print all movies
+// For the worst case, every prefix have k movies stored in -- O(mk)
+// So, overall movielist print with specific prefix -->T = mlog(m)+mk
+
+// Then we iterate through the prefix again for the best movies -- m
+// We find the prefix in the map -- O(mlog(m))
+// If the value is not empty, we access the first element
+// For the worst case, every prefix has movies -- O(1)
+// So, overala priting best movies -->  T = (mlog(m))
+
+// Therefore, the overall runtime is T = log(m)+nlog(n) + m*n+m*klog(k) + mlog(m)+mk + mlog(m)
+// --> O(mn + nlog(n)+ mklog(k) + mlog(m))
+
+/***************************** Space Analysis *************************************/ 
 
 
 
