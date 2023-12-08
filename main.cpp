@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <set>
 #include <queue>
-#include <map>
+#include <unordered_map> 
 #include "movies.h"
 using namespace std;
 
@@ -89,13 +89,15 @@ int main(int argc, char** argv){
     //  If no movie with that prefix exists print the following message
     // cout << "No movies found with prefix "<<"<replace with prefix>" << endl << endl;
 
+    // clock_t start, end;
+    // start = clock();
     sort(movielist.begin(),movielist.end(),Comp_al_1()); // constant space for movielist
     Movie_Prefix movies(prefixes); // O(m) for having a new min-heap
     movies.push(movielist); 
-    map<string, vector<Movie>> pre_movie = movies.getmovie_list();
+    unordered_map<string, vector<Movie>> pre_movie = movies.getmovie_list();
     for (int i = 0; i < prefixes.size();i++){ // Iterate m times
         string search_prefix = prefixes[i];
-        vector<Movie> p = pre_movie.find(prefixes[i])->second; //log(m)
+        vector<Movie> p = pre_movie.find(prefixes[i])->second; //(1)
         if (p.empty() == true){
             cout << "No movies found with prefix "<< prefixes[i] << endl;
         }
@@ -108,19 +110,26 @@ int main(int argc, char** argv){
     }
 
     for(int i = 0; i < prefixes.size();i++){ // m
-        vector<Movie> p = pre_movie.find(prefixes[i])->second; // log(m)
+        vector<Movie> p = pre_movie.find(prefixes[i])->second; // constant time
         if(p.empty()!= true){
             cout << "Best movie with prefix " << prefixes[i] << " is " ;
             cout << p[0].movieName << " with rating "<< p[0].movierate << endl; 
       // cout << std::fixed << std::setprecision(1) << pre_movie[i][0].movierate << endl;
         }
     }
+    // end = clock();
+    // cout << "Run time is: " << (end - start)/double(CLOCKS_PER_SEC);
 
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
     // cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
     return 0;
 }
+// Specific execution time for
+// input_20_random, prefix_large: 95ms
+// input_100_random, prefix_large: 86ms
+// input_1000_random, prefix_large: 106ms
+// input_76920_random, prefix_large: 483ms
 
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
 
@@ -146,23 +155,35 @@ int main(int argc, char** argv){
 // Therefore, overall, we have T = m*n+m*klog(k)
 
 /*Run Time for Printing*/
-// We have a map with key of prefix, and value of sorted movie vector with that prefix
+// We have a unordered map with key of prefix, and value of sorted movie vector with that prefix
 // Iterating through prefix list to check all prefixes -- m
-// For each prefix, find the value of that prefix key -- O(mlog(m))
+// For each prefix, find the value of that prefix key -- O(1)
 // If the vector is empty, print information; if not print all movies
 // For the worst case, every prefix have k movies stored in -- O(mk)
-// So, overall movielist print with specific prefix -->T = mlog(m)+mk
+// So, overall movielist print with specific prefix -->T = m+mk
 
 // Then we iterate through the prefix again for the best movies -- m
-// We find the prefix in the map -- O(mlog(m))
+// We find the prefix in the map -- O(1)
 // If the value is not empty, we access the first element
 // For the worst case, every prefix has movies -- O(1)
-// So, overala priting best movies -->  T = (mlog(m))
+// So, overala priting best movies -->  T = const
 
-// Therefore, the overall runtime is T = log(m)+nlog(n) + m*n+m*klog(k) + mlog(m)+mk + mlog(m)
-// --> O(mn + nlog(n)+ mklog(k) + mlog(m))
+// Therefore, the overall runtime is T = log(m)+nlog(n) + m*n+m*klog(k) + m+mk + const
+// --> O(mn + nlog(n)+ mklog(k))
 
 /***************************** Space Analysis *************************************/ 
+// Using a priority queue to sort prefix in alphabetical order -- O(m)
+// Using a vector to store movies with specific prefix -- O(k)
+// Using a map to store all prefix and movies -- O(m)
+// So, the overall space complexity is O(m+k)
+/* Part 3c */
+// I re-organized prefixes and movielists to make them into alphabetical order, 
+// and try to traverse both list only once to minimize my time complexity
+// It is hard to also obtain low space complexity 
+// because I would require new space for sorting prefixes and movies
+// Inserting prefixes into a min-heap has time complexity of (log(m)), but sorting has time complexity of O(mlog(m))
+
+
 
 
 

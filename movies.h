@@ -4,7 +4,7 @@
 #include <cstring>
 #include <algorithm>
 #include <queue>
-#include <map>
+#include <unordered_map> 
 using namespace std;
 
 // Define the calss for movie name and its rating
@@ -35,9 +35,9 @@ class Movie_Prefix{
    private:
       priority_queue <string, vector<string>,greater<string>> prefixes;
       // vector<string> prefixes;
-      map <string, vector<Movie>> pre_movie;
+      unordered_map <string, vector<Movie>> pre_movie;
    public:
       Movie_Prefix(vector<string> &p);
-      map <string, vector<Movie>> getmovie_list() const;
+      unordered_map <string, vector<Movie>> getmovie_list() const;
       void push(vector<Movie> &m);
 };

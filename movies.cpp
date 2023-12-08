@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
-#include <map>
+#include <unordered_map> 
 using namespace std;
 
 bool operator <(const Movie &m1,const Movie &m2){
@@ -23,13 +23,13 @@ bool operator <(const Movie &m1,const Movie &m2){
 
 Movie_Prefix::Movie_Prefix(vector<string> &p){ 
   for (auto e:p){
-    prefixes.push(e); // O(log(m))
+    prefixes.push(e); // T = log(m)
   }
 }
 // The run time for input all prefixes in-order (min-heap) is O(log(m))
 
 void Movie_Prefix :: push(vector<Movie> &m){
-  vector<Movie> movie_with_pre;
+  vector<Movie> movie_with_pre; // vector for movies with specific prefix -- space complexity O(k)
   int j = 0;
   int pre = 0;
   int post = 0;
@@ -56,7 +56,7 @@ void Movie_Prefix :: push(vector<Movie> &m){
     if(movie_with_pre.size()>1){
       sort(movie_with_pre.begin(),movie_with_pre.end(),Comp_ra());//O(klog(k))
     }
-    pre_movie[prefixes.top()] = movie_with_pre;
+    pre_movie[prefixes.top()] = movie_with_pre; // map for storing all keys and values -- O(m)
     movie_with_pre.clear();
 
     if (prefixes.top().find(prev_prefix) == 0){
@@ -70,18 +70,7 @@ void Movie_Prefix :: push(vector<Movie> &m){
     prefixes.pop();
   }
 }
-// We have m prefixes in alphabetical order, n movies in alphabetical order,
-// and k movies for each prefixes (for the worst case)
-// We iterate through the m prefix -- O(m)
-// While iterating through the prefix, we check if the movie start with the specific prefix
-// if the previous prefix is a prefix of the next prefix, 
-// we iterate movielist from where the previous prefix started for next prefix
-// For the worst case, every next prefix is a prefix of previous prefix,
-// then we iterate the whole movie list for every prefix --> O(mn)
-// If we find movie start with the prefix, we store it in to a vector
-// After we find all movies start with that prefix, we sort the movies in desired order
-// For the worst case, we have a k movies for every prefix --> O(m*(klog(k)))
-// Therefore, overall, we have mn + mklog(k) --> O(m*n+m*klog(k))
-map <string, vector<Movie>> Movie_Prefix :: getmovie_list() const{
+
+unordered_map <string, vector<Movie>> Movie_Prefix :: getmovie_list() const{
   return pre_movie;
 }
