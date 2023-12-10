@@ -164,7 +164,7 @@ int main(int argc, char** argv){
 
 // Then we iterate through the prefix again for the best movies -- m
 // We find the prefix in the map -- O(m)
-// If the value is not empty, we access the first element
+// If the value is not empty, we access the first element 
 // For the worst case, every prefix has movies -- O(m)
 // So, overala priting best movies -->  T = O(m)
 
