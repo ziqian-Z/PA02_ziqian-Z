@@ -157,18 +157,18 @@ int main(int argc, char** argv){
 /*Run Time for Printing*/
 // We have a unordered map with key of prefix, and value of sorted movie vector with that prefix
 // Iterating through prefix list to check all prefixes -- m
-// For each prefix, find the value of that prefix key -- O(1)
+// For each prefix, find the value of that prefix key -- O(m)
 // If the vector is empty, print information; if not print all movies
 // For the worst case, every prefix have k movies stored in -- O(mk)
 // So, overall movielist print with specific prefix -->T = m+mk
 
 // Then we iterate through the prefix again for the best movies -- m
-// We find the prefix in the map -- O(1)
+// We find the prefix in the map -- O(m)
 // If the value is not empty, we access the first element
-// For the worst case, every prefix has movies -- O(1)
-// So, overala priting best movies -->  T = const
+// For the worst case, every prefix has movies -- O(m)
+// So, overala priting best movies -->  T = O(m)
 
-// Therefore, the overall runtime is T = log(m)+nlog(n) + m*n+m*klog(k) + m+mk + const
+// Therefore, the overall runtime is T = log(m)+nlog(n) + m*n + m*klog(k) + m + mk + m
 // --> O(mn + nlog(n)+ mklog(k))
 
 /***************************** Space Analysis *************************************/ 
